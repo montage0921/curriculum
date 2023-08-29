@@ -1,0 +1,1274 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)https://colorhunt.co/ -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="theme-color" content="#ffffff">
+<meta name="google-site-verification" content="dvEhKnec-YPDrnTWvPxBpRmeKYfOin0w0OeHanN_eQ0">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<title>Color Palettes for Designers and Artists - Color Hunt</title>
+<meta name="description" content="Discover the newest hand-picked color palettes of Color Hunt. Get color inspiration for your design and art projects.">
+
+<meta property="og:title" content="Color Palettes for Designers and Artists - Color Hunt">
+<meta property="og:description" content="Discover the newest hand-picked color palettes of Color Hunt. Get color inspiration for your design and art projects.">
+<meta property="og:image" content="https://colorhunt.co/img/color-hunt-og.png">
+<meta property="og:url" content="https://colorhunt.co/">
+<meta property="og:type" content="website">
+
+<meta name="twitter:title" content="Color Palettes for Designers and Artists - Color Hunt">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@colorhunters">
+<meta name="twitter:description" content="Discover the newest hand-picked color palettes of Color Hunt. Get color inspiration for your design and art projects.">
+<meta name="twitter:image" content="https://colorhunt.co/img/color-hunt-og.png">
+<link rel="canonical" href="https://colorhunt.co/">
+<link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/hchlgfaicmddilenlflajnmomalehbom">
+<link rel="manifest" href="https://colorhunt.co/manifest.webmanifest">
+<link rel="shortcut icon" href="https://colorhunt.co/img/colorhunt-favicon.svg?2">
+<link rel="apple-touch-icon" sizes="192x192" href="https://colorhunt.co/img/color-hunt-icon-ios.png">
+<link rel="preconnect" href="https://fonts.gstatic.com/">
+<link href="./Color Palettes for Designers and Artists - Color Hunt_files/css2" rel="stylesheet">
+<link href="./Color Palettes for Designers and Artists - Color Hunt_files/style-2023.css" rel="stylesheet" media="all">
+<script async="" src="./Color Palettes for Designers and Artists - Color Hunt_files/analytics.js.download"></script><script src="./Color Palettes for Designers and Artists - Color Hunt_files/jquery.min.js.download"></script>
+<script src="./Color Palettes for Designers and Artists - Color Hunt_files/monetization.js.download"></script><div id="_bsa_srv-CK7DCK7E_0"></div></head>
+<body>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-37341238-3', 'auto');
+  ga('send', 'pageview');
+</script>
+
+<script async="" src="./Color Palettes for Designers and Artists - Color Hunt_files/js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-P464R9CGC0');
+</script>
+<script>
+function getFeed() { 
+	$.ajax({ type: 'POST', url: '/php/feed.php', dataType: "html", data: {
+	    step: step,
+	    sort: $('.left .tab[status=on]').attr('tab'),
+	    tags: tags,
+	    timeframe: $('.timeframe [status=on]').attr('timeframe')
+	  }, success: function(data) { 
+  		itemIndex = 0;
+			JSON.parse(data).forEach(function(itemData) { 
+				placeItem('feed', itemData['code'], formatThousands(itemData['likes']), itemData['date'])
+			});
+			$('.loader').hide();
+			if ( $('.feed .item').not('.hide').length == 0 ) {
+				$('.noResultsPage').show();
+				$('.right .meta').hide();
+				ga('send', 'event', 'no_results', tags);
+			}
+			carbonAd();
+	  }
+	});
+}
+
+function getLikes() {
+	myCollection = [];
+	if ( localStorage.getItem("myCollection") != null && localStorage.getItem("myCollection") != "" ) {
+		myCollection = localStorage.getItem("myCollection").split(",");
+	}
+	itemIndex = 0;
+	myCollection.forEach(function(code) { 
+		placeItem('likesList', code);
+		$('.right .likes').show();
+	});
+}
+
+function placeItem(place, code, likes, date) {
+	item = $('.main .item.hide').clone().removeClass('hide')
+	.attr('data-index', itemIndex).attr('data-code', code)
+	.css('animation-delay', itemIndex*30+"ms");
+	paintPalette(item, code);
+	item.find('.palette a').attr('href', '/palette/'+code);
+	item.find('.like').attr('onclick','like("'+code+'")');
+	if ( myCollection.indexOf(code) != -1 ) {
+		item.find('.like').attr('status','on'); 
+	}
+	item.find('.like span').text(likes);
+	item.find('.date').text(date);
+	if ( place == "likesList" ) {
+		item = item.find('.palette').attr('data-code', code);
+		item.find('span').remove();
+		item.append('<div class="x" onclick="like(\''+code+'\')\">✕</div>');
+		$('.likesList').prepend(item);
+	} else {
+		item.appendTo('.'+place);
+	}
+	itemIndex++;
+}
+
+function paintPalette(obj, code) {
+	i = 0;
+  while (i < 4) {
+    hex = code.substring(i*6, i*6+6);
+    obj.find('.c'+i).css('background-color', '#'+hex).find('span').text('#'+hex.toUpperCase()).attr('data-copy','#'+hex.toUpperCase());
+  	i++;
+  }
+}
+
+$(document).ready(function() {
+	page = "";
+	sort = "";
+	tags = "";
+	tagString = "";
+	single = "";
+	step = 0;
+	oktoload = "yes";
+	filterRedirect = true;
+	carbonRendered = false;
+
+	if ( page == "" ) { page = 'palettes'; }
+	if ( page == "palettes" && sort == "" && tags == "" ) {	sort = "new"; }
+	if ( sort != "" && single == "" ) { $('.tab[tab='+sort+']').attr('status','on'); }
+	if ( sort == 'popular' ) { $('.timeframe').css('display','flex'); }
+	
+	if ( page == 'palettes' ){
+		if ( single != '' ) { getSingle(); } 
+		else { getFeed(); }
+		getLikes();
+	} else {
+		if ( page != 'collection' ) { $('.main .left').hide(); $('.main .right').hide(); }
+		if ( page == 'collection' ) { $('.main .right .meta').hide(); carbonAd() }
+	}
+
+	if ( tagString != "" ) {
+		tagString = tagString.split('-');
+		tagString.forEach(function(tag) { applyTag(tag); })
+		$('.tab[tab='+tags+']').attr('status','on');
+	}
+
+	$('.tab[tab='+page+']').attr('status','on');
+
+	window.addEventListener('scroll', function scrolling() {
+	  if ( page == "palettes" && oktoload == "yes" && $(document).scrollTop() + $(window).height() >= $("body").height()-300 ) {
+	    step++;
+	    getFeed();
+	    oktoload = "no";
+	    setTimeout(function(){ oktoload = "yes" }, 500);
+	  }
+	});
+
+	$(window).click(function(event) {
+	  if (!$(event.target).closest(".filterContainer").length) {
+	    $('.filterWindow').addClass('hidden');
+	  }
+	  if (!$(event.target).closest(".kebab").length) {
+	    $('.littleMenu').addClass('hidden');
+	    $('.kebab').attr('status','off');
+	  }
+	});
+
+	$('.tab').click(function() {
+		$('.tab').attr('status','off')
+		$(this).attr('status','on')
+		$('.timeframe').hide();
+		if ( $(this).attr('tab') == 'popular' ) {
+			$('.timeframe').css('display','flex');
+		}
+	});
+
+	$('a').click(function() {
+		$('.loader').show();
+		setTimeout(function() {
+			$('.loader').hide();
+		}, 2000)
+	});
+
+	$('.filterContainer input').keydown(function(e) {
+		if (e.keyCode == 13 && query != "") {
+		  ga('send', 'event','search_query', query);
+		  $('.filterWindow .button.tag').eq(0).click()
+		}
+		if (e.keyCode == 8 && query == "") {
+			$('.inputContainer .tag').last().click();
+		}
+	});
+
+	$('.filterContainer input').focus(function(e) {
+		showTags();
+		$('.filterWindow').removeClass('hidden');
+	});
+
+	$('.kebab').click(function(e) {
+		if ( $('.littleMenu.hidden').length == 1 ) {
+			$('.kebab').attr('status','on');
+			$('.littleMenu').removeClass('hidden');
+		} else {
+			$('.kebab').attr('status','off');
+			$('.littleMenu').addClass('hidden');
+		}
+	});
+
+	if ('serviceWorker' in navigator) {
+	    navigator.serviceWorker.register('/service-worker.js', {
+	        scope: '.' // <--- THIS BIT IS REQUIRED
+	    }).then(function(registration) {
+	        // Registration was successful
+	    }, function(err) {
+	        // registration failed :(
+	    });
+	}
+});
+</script>
+<div class="header">
+<div class="wrap flex">
+<div class="left">
+<a href="https://colorhunt.co/" class="logo flex">
+<img class="tongue" src="./Color Palettes for Designers and Artists - Color Hunt_files/color-hunt-logo-tongue.svg" alt="color-hunt-logo">
+<img src="./Color Palettes for Designers and Artists - Color Hunt_files/color-hunt-logo-face.svg" alt="color-hunt-logo">
+<span class="mobileHide">Color Hunt</span>
+</a>
+</div>
+<div class="middle filterContainer">
+<div class="inputContainer flex">
+<input placeholder="Search palettes" onkeyup="showTags()">
+<div class="searchIcon icon" icon="search"></div>
+<a class="clear" href="https://colorhunt.co/">✕</a>
+</div>
+<div class="filterWindow dropdown hidden card">
+<div class="color section">
+<div class="title">Colors</div>
+</div>
+<div class="line"></div>
+<div class="collection section">
+<div class="title">Collections</div>
+</div>
+<div class="line"></div>
+<div class="related section hide">
+<div class="title">Related</div>
+</div>
+</div>
+</div>
+<div class="right flex">
+<a target="_blank" href="https://chrome.google.com/webstore/detail/hchlgfaicmddilenlflajnmomalehbom" class="button addToChrome">
+<img class="icon" src="./Color Palettes for Designers and Artists - Color Hunt_files/color-hunt-icon-chrome.png" alt="chrome-icon">
+Add to Chrome
+</a>
+<div class="kebab button iconButton"><span></span><span></span><span></span></div>
+<div class="littleMenu dropdown card hidden">
+<a class="tab button small" tab="palettes" href="https://colorhunt.co/" status="on">Palettes</a>
+<a class="tab button small" tab="create" href="https://colorhunt.co/create">Create</a>
+<a class="tab button small" tab="collection" href="https://colorhunt.co/collection">Collection</a>
+<div class="line"></div>
+<a class="tab button small" tab="about" href="https://colorhunt.co/about">About</a>
+<a class="tab button small" target="_blank" href="https://instagram.com/color.hunt">Instagram</a>
+<div class="line"></div>
+<a class="tab button small" tab="terms" href="https://colorhunt.co/terms">Terms of Service</a>
+<a class="tab button small" tab="privacy" href="https://colorhunt.co/privacy">Privacy Policy</a>
+<div class="line"></div>
+<a class="tab button small" href="https://twitter.com/galshirart" target="_blank">Made by Gal Shir</a>
+</div>
+</div>
+</div>
+<div class="line bottom"></div>
+</div>
+<div class="loader" style="display: none;">
+<div class="a"></div>
+<div class="b"></div>
+</div>
+<div class="hide tagBank">
+<div class="button tag" onclick="toggleTag(this)" tag="blue" alt="teal cold sky celeste azul cyan sea tech aqua business indigo calm royal primary" type="color">Blue<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="teal" alt="turquoise blue sky mint azul cyan sea tech aqua tosca emerald 66bfbf #66bfbf" type="color">Teal<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="mint" alt="turquoise lime blue sky azul cyan sea tech aqua tosca 66bfbf #66bfbf" type="color">Mint<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="green" alt="earth nature spring mint verde forest health olive tropical fresh lime tree" type="color">Green<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="sage" alt="earth nature forest olive tropical lime tree" type="color">Sage<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="yellow" alt="gold sun fire lemon baby mustard lime sand desert primary amarillo" type="color">Yellow<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="beige" alt="yellow light pastel skin baby tan sand coffee" type="color">Beige<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="brown" alt="gold skin wood fall forest chocolate desert bronze" type="color">Brown<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="orange" alt="gold skin honey salmon peach fire fall autumn naranja tropical mustard desert" type="color">Orange<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="peach" alt="pink orange coral love soft baby salmon cute" type="color">Peach<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="red" alt="pink rose love fire wine health rosa rojo medical primary japan" type="color">Red<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="maroon" alt="red love wine burgundy rojo luxury blood" type="color">Maroon<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="pink" alt="peach rose love magenta rosa lilac baby salmon cute" type="color">Pink<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="purple" alt="pink violet rose love magenta lilac lavender indigo lila morado royal cyberpunk" type="color">Purple<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="navy" alt="blue dark tech cold elegant business indigo" type="color">Navy<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="black" alt="dark tech luxury business royal" type="color">Black<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="grey" alt="silver gray luxury business tech calm gris metal" type="color">Grey<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="white" alt="light soft baby" type="color">White<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="pastel" alt="vintage minimalist minimal light soft aesthetic baby calm cute">Pastel<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="vintage" alt="retro boho old pastel luxury">Vintage<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="retro" alt="vintage music colorful fashion cyberpunk">Retro<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="neon" alt="colorful music technology light vibrant pop tech modern fun fresh happy contrast candy bold game cyberpunk">Neon<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="gold" alt="yellow orange honey brown golden dorado luxury desert royal bronze metal">Gold<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="light" alt="bright white pastel soft calm happy cute">Light<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="dark" alt="black elegant formal business luxury royal bold sad">Dark<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="warm" alt="brown red orange yellow beach love fire sun hot calm desert">Warm<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="cold" alt="blue sea teal navy cool">Cold<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="summer" alt="spring light warm beach sun calm">Summer<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="fall" alt="autumn brown orange soft nature earth calm wood">Fall<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="winter" alt="cold blue dark cool">Winter<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="spring" alt="bright light nature rainbow love fun vibrant flower">Spring<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="happy" alt="neon birthday rainbow summer light bright love fun vibrant baby candy cute">Happy<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="nature" alt="earth green spring fall travel autumn forest olive tropical natural fresh calm flower tree">Nature<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="earth" alt="brown army old green neutral wood fall autumn forest tropical natural earthy tree">Earth<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="night" alt="dark moon black blue purple">Night<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="space" alt="dark music black purple galaxy fun vibrant game cyberpunk">Space<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="rainbow" alt="sunset rgb cmyk colorful pop gay gradient love fun baby instagram candy flower">Rainbow<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="gradient" alt="colorful">Gradient<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="sunset" alt="yellow orange red purple love hot calm sunrise sky">Sunset<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="sky" alt="cool clouds">Sky<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="sea" alt="ocean aqua water cool">Sea<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="kids" alt="bright cake school light pastel neon rainbow love fun vibrant baby happy candy cute game flower">Kids<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="skin" alt="pink yellow brown nude baby salmon hair">Skin<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="food" alt="brown cake red yellow orange chocolate">Food<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="cream" alt="beige pink peach bright light love soft baby calm">Cream<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="coffee" alt="brown cake beige calm cafe wood coffe">Coffee<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="wedding" alt="purple valentine birthday blue white lilac aesthetic elegant luxury">Wedding<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="christmas" alt="red green winter love">Christmas<span class="x">✕</span></div>
+<div class="button tag" onclick="toggleTag(this)" tag="halloween" alt="orange red green fall autumn warm dark">Halloween<span class="x">✕</span></div>
+</div>
+<div class="wrap main flex">
+<div class="left">
+<a href="https://colorhunt.co/" class="tab button" tab="new" status="on"><div class="icon" icon="new"></div>New</a>
+<a href="https://colorhunt.co/popular" class="tab button" tab="popular"><div class="icon" icon="popular"></div>Popular</a>
+<div class="timeframe hide">
+<div class="button small" timeframe="30" onclick="changeTimeframe(this)" status="on">Month</div>
+<div class="button small" timeframe="365" onclick="changeTimeframe(this)">Year</div>
+<div class="button small" timeframe="4000" onclick="changeTimeframe(this)">All time</div>
+</div>
+<a href="https://colorhunt.co/random" class="tab button" tab="random"><div class="icon" icon="random"></div>Random</a>
+<a href="https://colorhunt.co/collection" class="tab button" tab="collection"><div class="icon" icon="like"></div>Collection</a>
+<div class="line"></div>
+<div class="tags">
+<a href="https://colorhunt.co/palettes/pastel" class="tab button small tag" tab="pastel">Pastel</a>
+<a href="https://colorhunt.co/palettes/vintage" class="tab button small tag" tab="vintage">Vintage</a>
+<a href="https://colorhunt.co/palettes/retro" class="tab button small tag" tab="retro">Retro</a>
+<a href="https://colorhunt.co/palettes/neon" class="tab button small tag" tab="neon">Neon</a>
+<a href="https://colorhunt.co/palettes/gold" class="tab button small tag" tab="gold">Gold</a>
+<a href="https://colorhunt.co/palettes/light" class="tab button small tag" tab="light">Light</a>
+<a href="https://colorhunt.co/palettes/dark" class="tab button small tag" tab="dark">Dark</a>
+<a href="https://colorhunt.co/palettes/warm" class="tab button small tag" tab="warm">Warm</a>
+<a href="https://colorhunt.co/palettes/cold" class="tab button small tag" tab="cold">Cold</a>
+<a href="https://colorhunt.co/palettes/summer" class="tab button small tag" tab="summer">Summer</a>
+<a href="https://colorhunt.co/palettes/fall" class="tab button small tag" tab="fall">Fall</a>
+<a href="https://colorhunt.co/palettes/winter" class="tab button small tag" tab="winter">Winter</a>
+<a href="https://colorhunt.co/palettes/spring" class="tab button small tag" tab="spring">Spring</a>
+<a href="https://colorhunt.co/palettes/happy" class="tab button small tag" tab="happy">Happy</a>
+<a href="https://colorhunt.co/palettes/nature" class="tab button small tag" tab="nature">Nature</a>
+<a href="https://colorhunt.co/palettes/earth" class="tab button small tag" tab="earth">Earth</a>
+<a href="https://colorhunt.co/palettes/night" class="tab button small tag" tab="night">Night</a>
+<a href="https://colorhunt.co/palettes/space" class="tab button small tag" tab="space">Space</a>
+<a href="https://colorhunt.co/palettes/rainbow" class="tab button small tag" tab="rainbow">Rainbow</a>
+<a href="https://colorhunt.co/palettes/gradient" class="tab button small tag" tab="gradient">Gradient</a>
+<a href="https://colorhunt.co/palettes/sunset" class="tab button small tag" tab="sunset">Sunset</a>
+<a href="https://colorhunt.co/palettes/sky" class="tab button small tag" tab="sky">Sky</a>
+<a href="https://colorhunt.co/palettes/sea" class="tab button small tag" tab="sky">Sea</a>
+<a href="https://colorhunt.co/palettes/kids" class="tab button small tag" tab="kids">Kids</a>
+<a href="https://colorhunt.co/palettes/skin" class="tab button small tag" tab="skin">Skin</a>
+<a href="https://colorhunt.co/palettes/food" class="tab button small tag" tab="food">Food</a>
+<a href="https://colorhunt.co/palettes/cream" class="tab button small tag" tab="cream">Cream</a>
+<a href="https://colorhunt.co/palettes/coffee" class="tab button small tag" tab="coffee">Coffee</a>
+<a href="https://colorhunt.co/palettes/wedding" class="tab button small tag" tab="wedding">Wedding</a>
+<a href="https://colorhunt.co/palettes/christmas" class="tab button small tag" tab="christmas">Christmas</a>
+<a href="https://colorhunt.co/palettes/halloween" class="tab button small tag" tab="halloween">Halloween</a>
+</div>
+</div>
+<div class="page">
+<div class="feed global">
+<div class="item hide">
+<div class="palette">
+<div class="place c3"><a></a><span onclick="copy(this)"></span></div>
+<div class="place c2"><a></a><span onclick="copy(this)"></span></div>
+<div class="place c1"><a></a><span onclick="copy(this)"></span></div>
+<div class="place c0"><a></a><span onclick="copy(this)"></span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like">
+<div class="icon" icon="like"></div>
+<span>Like</span>
+</div>
+</div>
+<span class="date">Today</span>
+</div>
+</div>
+<div class="item" data-index="0" data-code="0e21a04d2db79d44c0ec53b0" style="animation-delay: 0ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(236, 83, 176);"><a href="https://colorhunt.co/palette/0e21a04d2db79d44c0ec53b0"></a><span onclick="copy(this)" data-copy="#EC53B0">#EC53B0</span></div>
+<div class="place c2" style="background-color: rgb(157, 68, 192);"><a href="https://colorhunt.co/palette/0e21a04d2db79d44c0ec53b0"></a><span onclick="copy(this)" data-copy="#9D44C0">#9D44C0</span></div>
+<div class="place c1" style="background-color: rgb(77, 45, 183);"><a href="https://colorhunt.co/palette/0e21a04d2db79d44c0ec53b0"></a><span onclick="copy(this)" data-copy="#4D2DB7">#4D2DB7</span></div>
+<div class="place c0" style="background-color: rgb(14, 33, 160);"><a href="https://colorhunt.co/palette/0e21a04d2db79d44c0ec53b0"></a><span onclick="copy(this)" data-copy="#0E21A0">#0E21A0</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;0e21a04d2db79d44c0ec53b0&quot;)">
+<div class="icon" icon="like"></div>
+<span>147</span>
+</div>
+</div>
+<span class="date">18 hours</span>
+</div>
+</div><div class="item" data-index="1" data-code="94a684aec3aee4e4d0ffeef4" style="animation-delay: 30ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 238, 244);"><a href="https://colorhunt.co/palette/94a684aec3aee4e4d0ffeef4"></a><span onclick="copy(this)" data-copy="#FFEEF4">#FFEEF4</span></div>
+<div class="place c2" style="background-color: rgb(228, 228, 208);"><a href="https://colorhunt.co/palette/94a684aec3aee4e4d0ffeef4"></a><span onclick="copy(this)" data-copy="#E4E4D0">#E4E4D0</span></div>
+<div class="place c1" style="background-color: rgb(174, 195, 174);"><a href="https://colorhunt.co/palette/94a684aec3aee4e4d0ffeef4"></a><span onclick="copy(this)" data-copy="#AEC3AE">#AEC3AE</span></div>
+<div class="place c0" style="background-color: rgb(148, 166, 132);"><a href="https://colorhunt.co/palette/94a684aec3aee4e4d0ffeef4"></a><span onclick="copy(this)" data-copy="#94A684">#94A684</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;94a684aec3aee4e4d0ffeef4&quot;)">
+<div class="icon" icon="like"></div>
+<span>447</span>
+</div>
+</div>
+<span class="date">Yesterday</span>
+</div>
+</div><div class="item" data-index="2" data-code="45ffcafeffacffb6d9d67bff" style="animation-delay: 60ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(214, 123, 255);"><a href="https://colorhunt.co/palette/45ffcafeffacffb6d9d67bff"></a><span onclick="copy(this)" data-copy="#D67BFF">#D67BFF</span></div>
+<div class="place c2" style="background-color: rgb(255, 182, 217);"><a href="https://colorhunt.co/palette/45ffcafeffacffb6d9d67bff"></a><span onclick="copy(this)" data-copy="#FFB6D9">#FFB6D9</span></div>
+<div class="place c1" style="background-color: rgb(254, 255, 172);"><a href="https://colorhunt.co/palette/45ffcafeffacffb6d9d67bff"></a><span onclick="copy(this)" data-copy="#FEFFAC">#FEFFAC</span></div>
+<div class="place c0" style="background-color: rgb(69, 255, 202);"><a href="https://colorhunt.co/palette/45ffcafeffacffb6d9d67bff"></a><span onclick="copy(this)" data-copy="#45FFCA">#45FFCA</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;45ffcafeffacffb6d9d67bff&quot;)">
+<div class="icon" icon="like"></div>
+<span>301</span>
+</div>
+</div>
+<span class="date">2 days</span>
+</div>
+</div><div class="item" data-index="3" data-code="9a3b3bc08261e2c799f2ecbe" style="animation-delay: 90ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(242, 236, 190);"><a href="https://colorhunt.co/palette/9a3b3bc08261e2c799f2ecbe"></a><span onclick="copy(this)" data-copy="#F2ECBE">#F2ECBE</span></div>
+<div class="place c2" style="background-color: rgb(226, 199, 153);"><a href="https://colorhunt.co/palette/9a3b3bc08261e2c799f2ecbe"></a><span onclick="copy(this)" data-copy="#E2C799">#E2C799</span></div>
+<div class="place c1" style="background-color: rgb(192, 130, 97);"><a href="https://colorhunt.co/palette/9a3b3bc08261e2c799f2ecbe"></a><span onclick="copy(this)" data-copy="#C08261">#C08261</span></div>
+<div class="place c0" style="background-color: rgb(154, 59, 59);"><a href="https://colorhunt.co/palette/9a3b3bc08261e2c799f2ecbe"></a><span onclick="copy(this)" data-copy="#9A3B3B">#9A3B3B</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;9a3b3bc08261e2c799f2ecbe&quot;)">
+<div class="icon" icon="like"></div>
+<span>780</span>
+</div>
+</div>
+<span class="date">3 days</span>
+</div>
+</div><div class="item" data-index="4" data-code="fbf0b2ffc7ead8b4f8caedff" style="animation-delay: 120ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(202, 237, 255);"><a href="https://colorhunt.co/palette/fbf0b2ffc7ead8b4f8caedff"></a><span onclick="copy(this)" data-copy="#CAEDFF">#CAEDFF</span></div>
+<div class="place c2" style="background-color: rgb(216, 180, 248);"><a href="https://colorhunt.co/palette/fbf0b2ffc7ead8b4f8caedff"></a><span onclick="copy(this)" data-copy="#D8B4F8">#D8B4F8</span></div>
+<div class="place c1" style="background-color: rgb(255, 199, 234);"><a href="https://colorhunt.co/palette/fbf0b2ffc7ead8b4f8caedff"></a><span onclick="copy(this)" data-copy="#FFC7EA">#FFC7EA</span></div>
+<div class="place c0" style="background-color: rgb(251, 240, 178);"><a href="https://colorhunt.co/palette/fbf0b2ffc7ead8b4f8caedff"></a><span onclick="copy(this)" data-copy="#FBF0B2">#FBF0B2</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;fbf0b2ffc7ead8b4f8caedff&quot;)">
+<div class="icon" icon="like"></div>
+<span>765</span>
+</div>
+</div>
+<span class="date">4 days</span>
+</div>
+</div><div class="item" data-index="5" data-code="96c291ffdbaaffb7b7f4eeee" style="animation-delay: 150ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(244, 238, 238);"><a href="https://colorhunt.co/palette/96c291ffdbaaffb7b7f4eeee"></a><span onclick="copy(this)" data-copy="#F4EEEE">#F4EEEE</span></div>
+<div class="place c2" style="background-color: rgb(255, 183, 183);"><a href="https://colorhunt.co/palette/96c291ffdbaaffb7b7f4eeee"></a><span onclick="copy(this)" data-copy="#FFB7B7">#FFB7B7</span></div>
+<div class="place c1" style="background-color: rgb(255, 219, 170);"><a href="https://colorhunt.co/palette/96c291ffdbaaffb7b7f4eeee"></a><span onclick="copy(this)" data-copy="#FFDBAA">#FFDBAA</span></div>
+<div class="place c0" style="background-color: rgb(150, 194, 145);"><a href="https://colorhunt.co/palette/96c291ffdbaaffb7b7f4eeee"></a><span onclick="copy(this)" data-copy="#96C291">#96C291</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;96c291ffdbaaffb7b7f4eeee&quot;)">
+<div class="icon" icon="like"></div>
+<span>619</span>
+</div>
+</div>
+<span class="date">5 days</span>
+</div>
+</div><div class="item" data-index="6" data-code="793fdf7091f597fff4fffd8c" style="animation-delay: 180ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 253, 140);"><a href="https://colorhunt.co/palette/793fdf7091f597fff4fffd8c"></a><span onclick="copy(this)" data-copy="#FFFD8C">#FFFD8C</span></div>
+<div class="place c2" style="background-color: rgb(151, 255, 244);"><a href="https://colorhunt.co/palette/793fdf7091f597fff4fffd8c"></a><span onclick="copy(this)" data-copy="#97FFF4">#97FFF4</span></div>
+<div class="place c1" style="background-color: rgb(112, 145, 245);"><a href="https://colorhunt.co/palette/793fdf7091f597fff4fffd8c"></a><span onclick="copy(this)" data-copy="#7091F5">#7091F5</span></div>
+<div class="place c0" style="background-color: rgb(121, 63, 223);"><a href="https://colorhunt.co/palette/793fdf7091f597fff4fffd8c"></a><span onclick="copy(this)" data-copy="#793FDF">#793FDF</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;793fdf7091f597fff4fffd8c&quot;)">
+<div class="icon" icon="like"></div>
+<span>539</span>
+</div>
+</div>
+<span class="date">6 days</span>
+</div>
+</div><div class="item" data-index="7" data-code="040d12183d3d5c837493b1a6" style="animation-delay: 210ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(147, 177, 166);"><a href="https://colorhunt.co/palette/040d12183d3d5c837493b1a6"></a><span onclick="copy(this)" data-copy="#93B1A6">#93B1A6</span></div>
+<div class="place c2" style="background-color: rgb(92, 131, 116);"><a href="https://colorhunt.co/palette/040d12183d3d5c837493b1a6"></a><span onclick="copy(this)" data-copy="#5C8374">#5C8374</span></div>
+<div class="place c1" style="background-color: rgb(24, 61, 61);"><a href="https://colorhunt.co/palette/040d12183d3d5c837493b1a6"></a><span onclick="copy(this)" data-copy="#183D3D">#183D3D</span></div>
+<div class="place c0" style="background-color: rgb(4, 13, 18);"><a href="https://colorhunt.co/palette/040d12183d3d5c837493b1a6"></a><span onclick="copy(this)" data-copy="#040D12">#040D12</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;040d12183d3d5c837493b1a6&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,638</span>
+</div>
+</div>
+<span class="date">1 week</span>
+</div>
+</div><div class="item" data-index="8" data-code="faf1e4cedebd9eb384435334" style="animation-delay: 240ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(67, 83, 52);"><a href="https://colorhunt.co/palette/faf1e4cedebd9eb384435334"></a><span onclick="copy(this)" data-copy="#435334">#435334</span></div>
+<div class="place c2" style="background-color: rgb(158, 179, 132);"><a href="https://colorhunt.co/palette/faf1e4cedebd9eb384435334"></a><span onclick="copy(this)" data-copy="#9EB384">#9EB384</span></div>
+<div class="place c1" style="background-color: rgb(206, 222, 189);"><a href="https://colorhunt.co/palette/faf1e4cedebd9eb384435334"></a><span onclick="copy(this)" data-copy="#CEDEBD">#CEDEBD</span></div>
+<div class="place c0" style="background-color: rgb(250, 241, 228);"><a href="https://colorhunt.co/palette/faf1e4cedebd9eb384435334"></a><span onclick="copy(this)" data-copy="#FAF1E4">#FAF1E4</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;faf1e4cedebd9eb384435334&quot;)">
+<div class="icon" icon="like"></div>
+<span>2,428</span>
+</div>
+</div>
+<span class="date">1 week</span>
+</div>
+</div><div class="item" data-index="9" data-code="191d881450a3337ccfffc436" style="animation-delay: 270ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 196, 54);"><a href="https://colorhunt.co/palette/191d881450a3337ccfffc436"></a><span onclick="copy(this)" data-copy="#FFC436">#FFC436</span></div>
+<div class="place c2" style="background-color: rgb(51, 124, 207);"><a href="https://colorhunt.co/palette/191d881450a3337ccfffc436"></a><span onclick="copy(this)" data-copy="#337CCF">#337CCF</span></div>
+<div class="place c1" style="background-color: rgb(20, 80, 163);"><a href="https://colorhunt.co/palette/191d881450a3337ccfffc436"></a><span onclick="copy(this)" data-copy="#1450A3">#1450A3</span></div>
+<div class="place c0" style="background-color: rgb(25, 29, 136);"><a href="https://colorhunt.co/palette/191d881450a3337ccfffc436"></a><span onclick="copy(this)" data-copy="#191D88">#191D88</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;191d881450a3337ccfffc436&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,107</span>
+</div>
+</div>
+<span class="date">1 week</span>
+</div>
+</div><div class="item" data-index="10" data-code="fff5e0ff6969bb2525141e46" style="animation-delay: 300ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(20, 30, 70);"><a href="https://colorhunt.co/palette/fff5e0ff6969bb2525141e46"></a><span onclick="copy(this)" data-copy="#141E46">#141E46</span></div>
+<div class="place c2" style="background-color: rgb(187, 37, 37);"><a href="https://colorhunt.co/palette/fff5e0ff6969bb2525141e46"></a><span onclick="copy(this)" data-copy="#BB2525">#BB2525</span></div>
+<div class="place c1" style="background-color: rgb(255, 105, 105);"><a href="https://colorhunt.co/palette/fff5e0ff6969bb2525141e46"></a><span onclick="copy(this)" data-copy="#FF6969">#FF6969</span></div>
+<div class="place c0" style="background-color: rgb(255, 245, 224);"><a href="https://colorhunt.co/palette/fff5e0ff6969bb2525141e46"></a><span onclick="copy(this)" data-copy="#FFF5E0">#FFF5E0</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;fff5e0ff6969bb2525141e46&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,208</span>
+</div>
+</div>
+<span class="date">1 week</span>
+</div>
+</div><div class="item" data-index="11" data-code="352f445c5470b9b4c7faf0e6" style="animation-delay: 330ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(250, 240, 230);"><a href="https://colorhunt.co/palette/352f445c5470b9b4c7faf0e6"></a><span onclick="copy(this)" data-copy="#FAF0E6">#FAF0E6</span></div>
+<div class="place c2" style="background-color: rgb(185, 180, 199);"><a href="https://colorhunt.co/palette/352f445c5470b9b4c7faf0e6"></a><span onclick="copy(this)" data-copy="#B9B4C7">#B9B4C7</span></div>
+<div class="place c1" style="background-color: rgb(92, 84, 112);"><a href="https://colorhunt.co/palette/352f445c5470b9b4c7faf0e6"></a><span onclick="copy(this)" data-copy="#5C5470">#5C5470</span></div>
+<div class="place c0" style="background-color: rgb(53, 47, 68);"><a href="https://colorhunt.co/palette/352f445c5470b9b4c7faf0e6"></a><span onclick="copy(this)" data-copy="#352F44">#352F44</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;352f445c5470b9b4c7faf0e6&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,543</span>
+</div>
+</div>
+<span class="date">1 week</span>
+</div>
+</div><div class="item" data-index="12" data-code="a8df8ef3fde8ffe5e5ffbfbf" style="animation-delay: 360ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 191, 191);"><a href="https://colorhunt.co/palette/a8df8ef3fde8ffe5e5ffbfbf"></a><span onclick="copy(this)" data-copy="#FFBFBF">#FFBFBF</span></div>
+<div class="place c2" style="background-color: rgb(255, 229, 229);"><a href="https://colorhunt.co/palette/a8df8ef3fde8ffe5e5ffbfbf"></a><span onclick="copy(this)" data-copy="#FFE5E5">#FFE5E5</span></div>
+<div class="place c1" style="background-color: rgb(243, 253, 232);"><a href="https://colorhunt.co/palette/a8df8ef3fde8ffe5e5ffbfbf"></a><span onclick="copy(this)" data-copy="#F3FDE8">#F3FDE8</span></div>
+<div class="place c0" style="background-color: rgb(168, 223, 142);"><a href="https://colorhunt.co/palette/a8df8ef3fde8ffe5e5ffbfbf"></a><span onclick="copy(this)" data-copy="#A8DF8E">#A8DF8E</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;a8df8ef3fde8ffe5e5ffbfbf&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,916</span>
+</div>
+</div>
+<span class="date">1 week</span>
+</div>
+</div><div class="item" data-index="13" data-code="79155bc23373f6635cffba86" style="animation-delay: 390ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 186, 134);"><a href="https://colorhunt.co/palette/79155bc23373f6635cffba86"></a><span onclick="copy(this)" data-copy="#FFBA86">#FFBA86</span></div>
+<div class="place c2" style="background-color: rgb(246, 99, 92);"><a href="https://colorhunt.co/palette/79155bc23373f6635cffba86"></a><span onclick="copy(this)" data-copy="#F6635C">#F6635C</span></div>
+<div class="place c1" style="background-color: rgb(194, 51, 115);"><a href="https://colorhunt.co/palette/79155bc23373f6635cffba86"></a><span onclick="copy(this)" data-copy="#C23373">#C23373</span></div>
+<div class="place c0" style="background-color: rgb(121, 21, 91);"><a href="https://colorhunt.co/palette/79155bc23373f6635cffba86"></a><span onclick="copy(this)" data-copy="#79155B">#79155B</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;79155bc23373f6635cffba86&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,224</span>
+</div>
+</div>
+<span class="date">1 week</span>
+</div>
+</div><div class="item" data-index="14" data-code="0c356a279eff40f8ffd5ffd0" style="animation-delay: 420ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(213, 255, 208);"><a href="https://colorhunt.co/palette/0c356a279eff40f8ffd5ffd0"></a><span onclick="copy(this)" data-copy="#D5FFD0">#D5FFD0</span></div>
+<div class="place c2" style="background-color: rgb(64, 248, 255);"><a href="https://colorhunt.co/palette/0c356a279eff40f8ffd5ffd0"></a><span onclick="copy(this)" data-copy="#40F8FF">#40F8FF</span></div>
+<div class="place c1" style="background-color: rgb(39, 158, 255);"><a href="https://colorhunt.co/palette/0c356a279eff40f8ffd5ffd0"></a><span onclick="copy(this)" data-copy="#279EFF">#279EFF</span></div>
+<div class="place c0" style="background-color: rgb(12, 53, 106);"><a href="https://colorhunt.co/palette/0c356a279eff40f8ffd5ffd0"></a><span onclick="copy(this)" data-copy="#0C356A">#0C356A</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;0c356a279eff40f8ffd5ffd0&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,250</span>
+</div>
+</div>
+<span class="date">2 weeks</span>
+</div>
+</div><div class="item" data-index="15" data-code="ebe76cf0b86eed7b7b836096" style="animation-delay: 450ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(131, 96, 150);"><a href="https://colorhunt.co/palette/ebe76cf0b86eed7b7b836096"></a><span onclick="copy(this)" data-copy="#836096">#836096</span></div>
+<div class="place c2" style="background-color: rgb(237, 123, 123);"><a href="https://colorhunt.co/palette/ebe76cf0b86eed7b7b836096"></a><span onclick="copy(this)" data-copy="#ED7B7B">#ED7B7B</span></div>
+<div class="place c1" style="background-color: rgb(240, 184, 110);"><a href="https://colorhunt.co/palette/ebe76cf0b86eed7b7b836096"></a><span onclick="copy(this)" data-copy="#F0B86E">#F0B86E</span></div>
+<div class="place c0" style="background-color: rgb(235, 231, 108);"><a href="https://colorhunt.co/palette/ebe76cf0b86eed7b7b836096"></a><span onclick="copy(this)" data-copy="#EBE76C">#EBE76C</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;ebe76cf0b86eed7b7b836096&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,069</span>
+</div>
+</div>
+<span class="date">2 weeks</span>
+</div>
+</div><div class="item" data-index="16" data-code="e19898a2678a4d3c773f1d38" style="animation-delay: 480ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(63, 29, 56);"><a href="https://colorhunt.co/palette/e19898a2678a4d3c773f1d38"></a><span onclick="copy(this)" data-copy="#3F1D38">#3F1D38</span></div>
+<div class="place c2" style="background-color: rgb(77, 60, 119);"><a href="https://colorhunt.co/palette/e19898a2678a4d3c773f1d38"></a><span onclick="copy(this)" data-copy="#4D3C77">#4D3C77</span></div>
+<div class="place c1" style="background-color: rgb(162, 103, 138);"><a href="https://colorhunt.co/palette/e19898a2678a4d3c773f1d38"></a><span onclick="copy(this)" data-copy="#A2678A">#A2678A</span></div>
+<div class="place c0" style="background-color: rgb(225, 152, 152);"><a href="https://colorhunt.co/palette/e19898a2678a4d3c773f1d38"></a><span onclick="copy(this)" data-copy="#E19898">#E19898</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;e19898a2678a4d3c773f1d38&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,584</span>
+</div>
+</div>
+<span class="date">2 weeks</span>
+</div>
+</div><div class="item" data-index="17" data-code="313866504099974ec3fe7be5" style="animation-delay: 510ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(254, 123, 229);"><a href="https://colorhunt.co/palette/313866504099974ec3fe7be5"></a><span onclick="copy(this)" data-copy="#FE7BE5">#FE7BE5</span></div>
+<div class="place c2" style="background-color: rgb(151, 78, 195);"><a href="https://colorhunt.co/palette/313866504099974ec3fe7be5"></a><span onclick="copy(this)" data-copy="#974EC3">#974EC3</span></div>
+<div class="place c1" style="background-color: rgb(80, 64, 153);"><a href="https://colorhunt.co/palette/313866504099974ec3fe7be5"></a><span onclick="copy(this)" data-copy="#504099">#504099</span></div>
+<div class="place c0" style="background-color: rgb(49, 56, 102);"><a href="https://colorhunt.co/palette/313866504099974ec3fe7be5"></a><span onclick="copy(this)" data-copy="#313866">#313866</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;313866504099974ec3fe7be5&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,598</span>
+</div>
+</div>
+<span class="date">2 weeks</span>
+</div>
+</div><div class="item" data-index="18" data-code="614bc333bbc585e6c5c8ffe0" style="animation-delay: 540ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(200, 255, 224);"><a href="https://colorhunt.co/palette/614bc333bbc585e6c5c8ffe0"></a><span onclick="copy(this)" data-copy="#C8FFE0">#C8FFE0</span></div>
+<div class="place c2" style="background-color: rgb(133, 230, 197);"><a href="https://colorhunt.co/palette/614bc333bbc585e6c5c8ffe0"></a><span onclick="copy(this)" data-copy="#85E6C5">#85E6C5</span></div>
+<div class="place c1" style="background-color: rgb(51, 187, 197);"><a href="https://colorhunt.co/palette/614bc333bbc585e6c5c8ffe0"></a><span onclick="copy(this)" data-copy="#33BBC5">#33BBC5</span></div>
+<div class="place c0" style="background-color: rgb(97, 75, 195);"><a href="https://colorhunt.co/palette/614bc333bbc585e6c5c8ffe0"></a><span onclick="copy(this)" data-copy="#614BC3">#614BC3</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;614bc333bbc585e6c5c8ffe0&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,235</span>
+</div>
+</div>
+<span class="date">2 weeks</span>
+</div>
+</div><div class="item" data-index="19" data-code="fff3dadfccfbd0bfffbeadfa" style="animation-delay: 570ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(190, 173, 250);"><a href="https://colorhunt.co/palette/fff3dadfccfbd0bfffbeadfa"></a><span onclick="copy(this)" data-copy="#BEADFA">#BEADFA</span></div>
+<div class="place c2" style="background-color: rgb(208, 191, 255);"><a href="https://colorhunt.co/palette/fff3dadfccfbd0bfffbeadfa"></a><span onclick="copy(this)" data-copy="#D0BFFF">#D0BFFF</span></div>
+<div class="place c1" style="background-color: rgb(223, 204, 251);"><a href="https://colorhunt.co/palette/fff3dadfccfbd0bfffbeadfa"></a><span onclick="copy(this)" data-copy="#DFCCFB">#DFCCFB</span></div>
+<div class="place c0" style="background-color: rgb(255, 243, 218);"><a href="https://colorhunt.co/palette/fff3dadfccfbd0bfffbeadfa"></a><span onclick="copy(this)" data-copy="#FFF3DA">#FFF3DA</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;fff3dadfccfbd0bfffbeadfa&quot;)">
+<div class="icon" icon="like"></div>
+<span>3,034</span>
+</div>
+</div>
+<span class="date">2 weeks</span>
+</div>
+</div><div class="item" data-index="20" data-code="96b6c5adc4ceeee0c9f1f0e8" style="animation-delay: 600ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(241, 240, 232);"><a href="https://colorhunt.co/palette/96b6c5adc4ceeee0c9f1f0e8"></a><span onclick="copy(this)" data-copy="#F1F0E8">#F1F0E8</span></div>
+<div class="place c2" style="background-color: rgb(238, 224, 201);"><a href="https://colorhunt.co/palette/96b6c5adc4ceeee0c9f1f0e8"></a><span onclick="copy(this)" data-copy="#EEE0C9">#EEE0C9</span></div>
+<div class="place c1" style="background-color: rgb(173, 196, 206);"><a href="https://colorhunt.co/palette/96b6c5adc4ceeee0c9f1f0e8"></a><span onclick="copy(this)" data-copy="#ADC4CE">#ADC4CE</span></div>
+<div class="place c0" style="background-color: rgb(150, 182, 197);"><a href="https://colorhunt.co/palette/96b6c5adc4ceeee0c9f1f0e8"></a><span onclick="copy(this)" data-copy="#96B6C5">#96B6C5</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;96b6c5adc4ceeee0c9f1f0e8&quot;)">
+<div class="icon" icon="like"></div>
+<span>4,167</span>
+</div>
+</div>
+<span class="date">2 weeks</span>
+</div>
+</div><div class="item" data-index="21" data-code="900c3fc70039f94c10f8de22" style="animation-delay: 630ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(248, 222, 34);"><a href="https://colorhunt.co/palette/900c3fc70039f94c10f8de22"></a><span onclick="copy(this)" data-copy="#F8DE22">#F8DE22</span></div>
+<div class="place c2" style="background-color: rgb(249, 76, 16);"><a href="https://colorhunt.co/palette/900c3fc70039f94c10f8de22"></a><span onclick="copy(this)" data-copy="#F94C10">#F94C10</span></div>
+<div class="place c1" style="background-color: rgb(199, 0, 57);"><a href="https://colorhunt.co/palette/900c3fc70039f94c10f8de22"></a><span onclick="copy(this)" data-copy="#C70039">#C70039</span></div>
+<div class="place c0" style="background-color: rgb(144, 12, 63);"><a href="https://colorhunt.co/palette/900c3fc70039f94c10f8de22"></a><span onclick="copy(this)" data-copy="#900C3F">#900C3F</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;900c3fc70039f94c10f8de22&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,738</span>
+</div>
+</div>
+<span class="date">3 weeks</span>
+</div>
+</div><div class="item" data-index="22" data-code="f8f0e5eadbc8dac0a3102c57" style="animation-delay: 660ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(16, 44, 87);"><a href="https://colorhunt.co/palette/f8f0e5eadbc8dac0a3102c57"></a><span onclick="copy(this)" data-copy="#102C57">#102C57</span></div>
+<div class="place c2" style="background-color: rgb(218, 192, 163);"><a href="https://colorhunt.co/palette/f8f0e5eadbc8dac0a3102c57"></a><span onclick="copy(this)" data-copy="#DAC0A3">#DAC0A3</span></div>
+<div class="place c1" style="background-color: rgb(234, 219, 200);"><a href="https://colorhunt.co/palette/f8f0e5eadbc8dac0a3102c57"></a><span onclick="copy(this)" data-copy="#EADBC8">#EADBC8</span></div>
+<div class="place c0" style="background-color: rgb(248, 240, 229);"><a href="https://colorhunt.co/palette/f8f0e5eadbc8dac0a3102c57"></a><span onclick="copy(this)" data-copy="#F8F0E5">#F8F0E5</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;f8f0e5eadbc8dac0a3102c57&quot;)">
+<div class="icon" icon="like"></div>
+<span>3,660</span>
+</div>
+</div>
+<span class="date">3 weeks</span>
+</div>
+</div><div class="item" data-index="23" data-code="252b484450695b9a8bf7e987" style="animation-delay: 690ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(247, 233, 135);"><a href="https://colorhunt.co/palette/252b484450695b9a8bf7e987"></a><span onclick="copy(this)" data-copy="#F7E987">#F7E987</span></div>
+<div class="place c2" style="background-color: rgb(91, 154, 139);"><a href="https://colorhunt.co/palette/252b484450695b9a8bf7e987"></a><span onclick="copy(this)" data-copy="#5B9A8B">#5B9A8B</span></div>
+<div class="place c1" style="background-color: rgb(68, 80, 105);"><a href="https://colorhunt.co/palette/252b484450695b9a8bf7e987"></a><span onclick="copy(this)" data-copy="#445069">#445069</span></div>
+<div class="place c0" style="background-color: rgb(37, 43, 72);"><a href="https://colorhunt.co/palette/252b484450695b9a8bf7e987"></a><span onclick="copy(this)" data-copy="#252B48">#252B48</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;252b484450695b9a8bf7e987&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,612</span>
+</div>
+</div>
+<span class="date">3 weeks</span>
+</div>
+</div><div class="item" data-index="24" data-code="ffdbc39f91cc5c4b993d246c" style="animation-delay: 720ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(61, 36, 108);"><a href="https://colorhunt.co/palette/ffdbc39f91cc5c4b993d246c"></a><span onclick="copy(this)" data-copy="#3D246C">#3D246C</span></div>
+<div class="place c2" style="background-color: rgb(92, 75, 153);"><a href="https://colorhunt.co/palette/ffdbc39f91cc5c4b993d246c"></a><span onclick="copy(this)" data-copy="#5C4B99">#5C4B99</span></div>
+<div class="place c1" style="background-color: rgb(159, 145, 204);"><a href="https://colorhunt.co/palette/ffdbc39f91cc5c4b993d246c"></a><span onclick="copy(this)" data-copy="#9F91CC">#9F91CC</span></div>
+<div class="place c0" style="background-color: rgb(255, 219, 195);"><a href="https://colorhunt.co/palette/ffdbc39f91cc5c4b993d246c"></a><span onclick="copy(this)" data-copy="#FFDBC3">#FFDBC3</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;ffdbc39f91cc5c4b993d246c&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,624</span>
+</div>
+</div>
+<span class="date">3 weeks</span>
+</div>
+</div><div class="item" data-index="25" data-code="35155d512b814477ce8cabff" style="animation-delay: 750ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(140, 171, 255);"><a href="https://colorhunt.co/palette/35155d512b814477ce8cabff"></a><span onclick="copy(this)" data-copy="#8CABFF">#8CABFF</span></div>
+<div class="place c2" style="background-color: rgb(68, 119, 206);"><a href="https://colorhunt.co/palette/35155d512b814477ce8cabff"></a><span onclick="copy(this)" data-copy="#4477CE">#4477CE</span></div>
+<div class="place c1" style="background-color: rgb(81, 43, 129);"><a href="https://colorhunt.co/palette/35155d512b814477ce8cabff"></a><span onclick="copy(this)" data-copy="#512B81">#512B81</span></div>
+<div class="place c0" style="background-color: rgb(53, 21, 93);"><a href="https://colorhunt.co/palette/35155d512b814477ce8cabff"></a><span onclick="copy(this)" data-copy="#35155D">#35155D</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;35155d512b814477ce8cabff&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,627</span>
+</div>
+</div>
+<span class="date">3 weeks</span>
+</div>
+</div><div class="item" data-index="26" data-code="c8e4b29ed2be7eaa92ffd9b7" style="animation-delay: 780ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 217, 183);"><a href="https://colorhunt.co/palette/c8e4b29ed2be7eaa92ffd9b7"></a><span onclick="copy(this)" data-copy="#FFD9B7">#FFD9B7</span></div>
+<div class="place c2" style="background-color: rgb(126, 170, 146);"><a href="https://colorhunt.co/palette/c8e4b29ed2be7eaa92ffd9b7"></a><span onclick="copy(this)" data-copy="#7EAA92">#7EAA92</span></div>
+<div class="place c1" style="background-color: rgb(158, 210, 190);"><a href="https://colorhunt.co/palette/c8e4b29ed2be7eaa92ffd9b7"></a><span onclick="copy(this)" data-copy="#9ED2BE">#9ED2BE</span></div>
+<div class="place c0" style="background-color: rgb(200, 228, 178);"><a href="https://colorhunt.co/palette/c8e4b29ed2be7eaa92ffd9b7"></a><span onclick="copy(this)" data-copy="#C8E4B2">#C8E4B2</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;c8e4b29ed2be7eaa92ffd9b7&quot;)">
+<div class="icon" icon="like"></div>
+<span>2,397</span>
+</div>
+</div>
+<span class="date">3 weeks</span>
+</div>
+</div><div class="item" data-index="27" data-code="ffc6acfff6dcc4c1a49e9fa5" style="animation-delay: 810ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(158, 159, 165);"><a href="https://colorhunt.co/palette/ffc6acfff6dcc4c1a49e9fa5"></a><span onclick="copy(this)" data-copy="#9E9FA5">#9E9FA5</span></div>
+<div class="place c2" style="background-color: rgb(196, 193, 164);"><a href="https://colorhunt.co/palette/ffc6acfff6dcc4c1a49e9fa5"></a><span onclick="copy(this)" data-copy="#C4C1A4">#C4C1A4</span></div>
+<div class="place c1" style="background-color: rgb(255, 246, 220);"><a href="https://colorhunt.co/palette/ffc6acfff6dcc4c1a49e9fa5"></a><span onclick="copy(this)" data-copy="#FFF6DC">#FFF6DC</span></div>
+<div class="place c0" style="background-color: rgb(255, 198, 172);"><a href="https://colorhunt.co/palette/ffc6acfff6dcc4c1a49e9fa5"></a><span onclick="copy(this)" data-copy="#FFC6AC">#FFC6AC</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;ffc6acfff6dcc4c1a49e9fa5&quot;)">
+<div class="icon" icon="like"></div>
+<span>3,231</span>
+</div>
+</div>
+<span class="date">3 weeks</span>
+</div>
+</div><div class="item" data-index="28" data-code="2414689f0d7fea1179f79bd3" style="animation-delay: 840ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(247, 155, 211);"><a href="https://colorhunt.co/palette/2414689f0d7fea1179f79bd3"></a><span onclick="copy(this)" data-copy="#F79BD3">#F79BD3</span></div>
+<div class="place c2" style="background-color: rgb(234, 17, 121);"><a href="https://colorhunt.co/palette/2414689f0d7fea1179f79bd3"></a><span onclick="copy(this)" data-copy="#EA1179">#EA1179</span></div>
+<div class="place c1" style="background-color: rgb(159, 13, 127);"><a href="https://colorhunt.co/palette/2414689f0d7fea1179f79bd3"></a><span onclick="copy(this)" data-copy="#9F0D7F">#9F0D7F</span></div>
+<div class="place c0" style="background-color: rgb(36, 20, 104);"><a href="https://colorhunt.co/palette/2414689f0d7fea1179f79bd3"></a><span onclick="copy(this)" data-copy="#241468">#241468</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;2414689f0d7fea1179f79bd3&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,994</span>
+</div>
+</div>
+<span class="date">4 weeks</span>
+</div>
+</div><div class="item" data-index="29" data-code="6f61c0a084e88be8e5d5ffe4" style="animation-delay: 870ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(213, 255, 228);"><a href="https://colorhunt.co/palette/6f61c0a084e88be8e5d5ffe4"></a><span onclick="copy(this)" data-copy="#D5FFE4">#D5FFE4</span></div>
+<div class="place c2" style="background-color: rgb(139, 232, 229);"><a href="https://colorhunt.co/palette/6f61c0a084e88be8e5d5ffe4"></a><span onclick="copy(this)" data-copy="#8BE8E5">#8BE8E5</span></div>
+<div class="place c1" style="background-color: rgb(160, 132, 232);"><a href="https://colorhunt.co/palette/6f61c0a084e88be8e5d5ffe4"></a><span onclick="copy(this)" data-copy="#A084E8">#A084E8</span></div>
+<div class="place c0" style="background-color: rgb(111, 97, 192);"><a href="https://colorhunt.co/palette/6f61c0a084e88be8e5d5ffe4"></a><span onclick="copy(this)" data-copy="#6F61C0">#6F61C0</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;6f61c0a084e88be8e5d5ffe4&quot;)">
+<div class="icon" icon="like"></div>
+<span>2,022</span>
+</div>
+</div>
+<span class="date">4 weeks</span>
+</div>
+</div><div class="item" data-index="30" data-code="eac696c8ae7d76582765451f" style="animation-delay: 900ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(101, 69, 31);"><a href="https://colorhunt.co/palette/eac696c8ae7d76582765451f"></a><span onclick="copy(this)" data-copy="#65451F">#65451F</span></div>
+<div class="place c2" style="background-color: rgb(118, 88, 39);"><a href="https://colorhunt.co/palette/eac696c8ae7d76582765451f"></a><span onclick="copy(this)" data-copy="#765827">#765827</span></div>
+<div class="place c1" style="background-color: rgb(200, 174, 125);"><a href="https://colorhunt.co/palette/eac696c8ae7d76582765451f"></a><span onclick="copy(this)" data-copy="#C8AE7D">#C8AE7D</span></div>
+<div class="place c0" style="background-color: rgb(234, 198, 150);"><a href="https://colorhunt.co/palette/eac696c8ae7d76582765451f"></a><span onclick="copy(this)" data-copy="#EAC696">#EAC696</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;eac696c8ae7d76582765451f&quot;)">
+<div class="icon" icon="like"></div>
+<span>3,940</span>
+</div>
+</div>
+<span class="date">4 weeks</span>
+</div>
+</div><div class="item" data-index="31" data-code="27282961677ad8d9dafff6e0" style="animation-delay: 930ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 246, 224);"><a href="https://colorhunt.co/palette/27282961677ad8d9dafff6e0"></a><span onclick="copy(this)" data-copy="#FFF6E0">#FFF6E0</span></div>
+<div class="place c2" style="background-color: rgb(216, 217, 218);"><a href="https://colorhunt.co/palette/27282961677ad8d9dafff6e0"></a><span onclick="copy(this)" data-copy="#D8D9DA">#D8D9DA</span></div>
+<div class="place c1" style="background-color: rgb(97, 103, 122);"><a href="https://colorhunt.co/palette/27282961677ad8d9dafff6e0"></a><span onclick="copy(this)" data-copy="#61677A">#61677A</span></div>
+<div class="place c0" style="background-color: rgb(39, 40, 41);"><a href="https://colorhunt.co/palette/27282961677ad8d9dafff6e0"></a><span onclick="copy(this)" data-copy="#272829">#272829</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;27282961677ad8d9dafff6e0&quot;)">
+<div class="icon" icon="like"></div>
+<span>3,040</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="32" data-code="fde5ecfcbaade48586916db3" style="animation-delay: 960ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(145, 109, 179);"><a href="https://colorhunt.co/palette/fde5ecfcbaade48586916db3"></a><span onclick="copy(this)" data-copy="#916DB3">#916DB3</span></div>
+<div class="place c2" style="background-color: rgb(228, 133, 134);"><a href="https://colorhunt.co/palette/fde5ecfcbaade48586916db3"></a><span onclick="copy(this)" data-copy="#E48586">#E48586</span></div>
+<div class="place c1" style="background-color: rgb(252, 186, 173);"><a href="https://colorhunt.co/palette/fde5ecfcbaade48586916db3"></a><span onclick="copy(this)" data-copy="#FCBAAD">#FCBAAD</span></div>
+<div class="place c0" style="background-color: rgb(253, 229, 236);"><a href="https://colorhunt.co/palette/fde5ecfcbaade48586916db3"></a><span onclick="copy(this)" data-copy="#FDE5EC">#FDE5EC</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;fde5ecfcbaade48586916db3&quot;)">
+<div class="icon" icon="like"></div>
+<span>2,530</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="33" data-code="ffeeccffddccffccccfebbcc" style="animation-delay: 990ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(254, 187, 204);"><a href="https://colorhunt.co/palette/ffeeccffddccffccccfebbcc"></a><span onclick="copy(this)" data-copy="#FEBBCC">#FEBBCC</span></div>
+<div class="place c2" style="background-color: rgb(255, 204, 204);"><a href="https://colorhunt.co/palette/ffeeccffddccffccccfebbcc"></a><span onclick="copy(this)" data-copy="#FFCCCC">#FFCCCC</span></div>
+<div class="place c1" style="background-color: rgb(255, 221, 204);"><a href="https://colorhunt.co/palette/ffeeccffddccffccccfebbcc"></a><span onclick="copy(this)" data-copy="#FFDDCC">#FFDDCC</span></div>
+<div class="place c0" style="background-color: rgb(255, 238, 204);"><a href="https://colorhunt.co/palette/ffeeccffddccffccccfebbcc"></a><span onclick="copy(this)" data-copy="#FFEECC">#FFEECC</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;ffeeccffddccffccccfebbcc&quot;)">
+<div class="icon" icon="like"></div>
+<span>4,474</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="34" data-code="3226538062d69288f8ffd2d7" style="animation-delay: 1020ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 210, 215);"><a href="https://colorhunt.co/palette/3226538062d69288f8ffd2d7"></a><span onclick="copy(this)" data-copy="#FFD2D7">#FFD2D7</span></div>
+<div class="place c2" style="background-color: rgb(146, 136, 248);"><a href="https://colorhunt.co/palette/3226538062d69288f8ffd2d7"></a><span onclick="copy(this)" data-copy="#9288F8">#9288F8</span></div>
+<div class="place c1" style="background-color: rgb(128, 98, 214);"><a href="https://colorhunt.co/palette/3226538062d69288f8ffd2d7"></a><span onclick="copy(this)" data-copy="#8062D6">#8062D6</span></div>
+<div class="place c0" style="background-color: rgb(50, 38, 83);"><a href="https://colorhunt.co/palette/3226538062d69288f8ffd2d7"></a><span onclick="copy(this)" data-copy="#322653">#322653</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;3226538062d69288f8ffd2d7&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,801</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="35" data-code="cece5affe17bfd8d14c51605" style="animation-delay: 1050ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(197, 22, 5);"><a href="https://colorhunt.co/palette/cece5affe17bfd8d14c51605"></a><span onclick="copy(this)" data-copy="#C51605">#C51605</span></div>
+<div class="place c2" style="background-color: rgb(253, 141, 20);"><a href="https://colorhunt.co/palette/cece5affe17bfd8d14c51605"></a><span onclick="copy(this)" data-copy="#FD8D14">#FD8D14</span></div>
+<div class="place c1" style="background-color: rgb(255, 225, 123);"><a href="https://colorhunt.co/palette/cece5affe17bfd8d14c51605"></a><span onclick="copy(this)" data-copy="#FFE17B">#FFE17B</span></div>
+<div class="place c0" style="background-color: rgb(206, 206, 90);"><a href="https://colorhunt.co/palette/cece5affe17bfd8d14c51605"></a><span onclick="copy(this)" data-copy="#CECE5A">#CECE5A</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;cece5affe17bfd8d14c51605&quot;)">
+<div class="icon" icon="like"></div>
+<span>2,324</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="36" data-code="f6f4eb91c8e4749bc24682a9" style="animation-delay: 1080ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(70, 130, 169);"><a href="https://colorhunt.co/palette/f6f4eb91c8e4749bc24682a9"></a><span onclick="copy(this)" data-copy="#4682A9">#4682A9</span></div>
+<div class="place c2" style="background-color: rgb(116, 155, 194);"><a href="https://colorhunt.co/palette/f6f4eb91c8e4749bc24682a9"></a><span onclick="copy(this)" data-copy="#749BC2">#749BC2</span></div>
+<div class="place c1" style="background-color: rgb(145, 200, 228);"><a href="https://colorhunt.co/palette/f6f4eb91c8e4749bc24682a9"></a><span onclick="copy(this)" data-copy="#91C8E4">#91C8E4</span></div>
+<div class="place c0" style="background-color: rgb(246, 244, 235);"><a href="https://colorhunt.co/palette/f6f4eb91c8e4749bc24682a9"></a><span onclick="copy(this)" data-copy="#F6F4EB">#F6F4EB</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;f6f4eb91c8e4749bc24682a9&quot;)">
+<div class="icon" icon="like"></div>
+<span>5,599</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="37" data-code="fba1b7ffd1dafff0f5ffdbaa" style="animation-delay: 1110ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 219, 170);"><a href="https://colorhunt.co/palette/fba1b7ffd1dafff0f5ffdbaa"></a><span onclick="copy(this)" data-copy="#FFDBAA">#FFDBAA</span></div>
+<div class="place c2" style="background-color: rgb(255, 240, 245);"><a href="https://colorhunt.co/palette/fba1b7ffd1dafff0f5ffdbaa"></a><span onclick="copy(this)" data-copy="#FFF0F5">#FFF0F5</span></div>
+<div class="place c1" style="background-color: rgb(255, 209, 218);"><a href="https://colorhunt.co/palette/fba1b7ffd1dafff0f5ffdbaa"></a><span onclick="copy(this)" data-copy="#FFD1DA">#FFD1DA</span></div>
+<div class="place c0" style="background-color: rgb(251, 161, 183);"><a href="https://colorhunt.co/palette/fba1b7ffd1dafff0f5ffdbaa"></a><span onclick="copy(this)" data-copy="#FBA1B7">#FBA1B7</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;fba1b7ffd1dafff0f5ffdbaa&quot;)">
+<div class="icon" icon="like"></div>
+<span>3,741</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="38" data-code="e8ffceacfadf94add77c73c0" style="animation-delay: 1140ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(124, 115, 192);"><a href="https://colorhunt.co/palette/e8ffceacfadf94add77c73c0"></a><span onclick="copy(this)" data-copy="#7C73C0">#7C73C0</span></div>
+<div class="place c2" style="background-color: rgb(148, 173, 215);"><a href="https://colorhunt.co/palette/e8ffceacfadf94add77c73c0"></a><span onclick="copy(this)" data-copy="#94ADD7">#94ADD7</span></div>
+<div class="place c1" style="background-color: rgb(172, 250, 223);"><a href="https://colorhunt.co/palette/e8ffceacfadf94add77c73c0"></a><span onclick="copy(this)" data-copy="#ACFADF">#ACFADF</span></div>
+<div class="place c0" style="background-color: rgb(232, 255, 206);"><a href="https://colorhunt.co/palette/e8ffceacfadf94add77c73c0"></a><span onclick="copy(this)" data-copy="#E8FFCE">#E8FFCE</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;e8ffceacfadf94add77c73c0&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,787</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div><div class="item" data-index="39" data-code="f11a7b9821763e001fffe5ad" style="animation-delay: 1170ms;">
+<div class="palette">
+<div class="place c3" style="background-color: rgb(255, 229, 173);"><a href="https://colorhunt.co/palette/f11a7b9821763e001fffe5ad"></a><span onclick="copy(this)" data-copy="#FFE5AD">#FFE5AD</span></div>
+<div class="place c2" style="background-color: rgb(62, 0, 31);"><a href="https://colorhunt.co/palette/f11a7b9821763e001fffe5ad"></a><span onclick="copy(this)" data-copy="#3E001F">#3E001F</span></div>
+<div class="place c1" style="background-color: rgb(152, 33, 118);"><a href="https://colorhunt.co/palette/f11a7b9821763e001fffe5ad"></a><span onclick="copy(this)" data-copy="#982176">#982176</span></div>
+<div class="place c0" style="background-color: rgb(241, 26, 123);"><a href="https://colorhunt.co/palette/f11a7b9821763e001fffe5ad"></a><span onclick="copy(this)" data-copy="#F11A7B">#F11A7B</span></div>
+</div>
+<div class="flex">
+<div class="actions flex">
+<div class="button like" onclick="like(&quot;f11a7b9821763e001fffe5ad&quot;)">
+<div class="icon" icon="like"></div>
+<span>1,448</span>
+</div>
+</div>
+<span class="date">1 month</span>
+</div>
+</div></div>
+</div>
+<div class="right">
+<div class="meta">
+<h1>Color Palettes for Designers and Artists</h1>
+<h2>Discover the newest hand-picked palettes of Color Hunt</h2>
+<div class="line"></div>
+</div>
+<div class="likes">
+<div class="flex">
+<a href="https://colorhunt.co/collection" class="title">Collection</a>
+</div>
+<div class="likesList"></div>
+</div>
+<div class="ad">
+<div id="sponsor-banner"><script type="text/javascript" src="./Color Palettes for Designers and Artists - Color Hunt_files/carbon.js.download" id="_carbonads_js"></script><div id="carbonads"><span><span class="carbon-wrap"><a href="https://srv.carbonads.net/ads/click/x/GTND42J7CK7IC277CA7LYKQNF67ITKJUFTSDEZ3JCYAI653NCAYDTK7KCA7DTKJ7CTADE2JWCTSDCKJJC6AIC53KC6SDLK7ICK7DTK3EHJNCLSIZ?segment=placement:;" class="carbon-img" target="_blank" rel="noopener sponsored"><img src="./Color Palettes for Designers and Artists - Color Hunt_files/1690393865-1685559799-c5290eb9-2b50-474d-b5bd-0b5544e687ab.png" alt="ads via Carbon" border="0" height="100" width="130" style="max-width: 130px;"></a><a href="https://srv.carbonads.net/ads/click/x/GTND42J7CK7IC277CA7LYKQNF67ITKJUFTSDEZ3JCYAI653NCAYDTK7KCA7DTKJ7CTADE2JWCTSDCKJJC6AIC53KC6SDLK7ICK7DTK3EHJNCLSIZ?segment=placement:;" class="carbon-text" target="_blank" rel="noopener sponsored">Start experiencing the value of Clean Code with a no commitment, 14-day trial of SonarCloud.</a></span><a href="http://carbonads.net/?utm_source=&amp;utm_medium=ad_via_link&amp;utm_campaign=in_unit&amp;utm_term=carbon" class="carbon-poweredby" target="_blank" rel="noopener sponsored">ads via Carbon</a></span></div></div>
+
+<style>
+				@media only screen and (min-width: 0px) and (min-height: 0px) {
+					div[id^="bsa-zone_1682448560669-3_123456"] {
+						min-width: 300px;
+						min-height: 250px;
+					}
+				}
+			</style>
+
+</div>
+</div>
+</div>
+<script>
+function showTags() {
+	$('.filterWindow .section').hide();
+	$('.filterWindow .button').remove();
+	query = $('.filterContainer input').val().toLowerCase();
+	$('.tagBank .button').each(function() {
+		tag = $(this).attr('tag');
+		type = $(this).attr('type');
+		if ( !type ) { type = "collection"; }
+		alt = $(this).attr('alt').split(" ");
+		if ( tag.substring(0, query.length) == query ) {
+			$('.filterWindow .'+type).append($(this).clone()).show();
+		}
+		if ( alt.includes(query) ) {
+			$('.filterWindow .related').append($(this).clone()).show();
+		}
+	});
+}
+
+function toggleTag(tag) {
+	if ( $(tag).attr('status') != 'on' ) {
+		applyTag($(tag).attr('tag'));
+	} else {
+		$('[tag='+$(tag).attr('tag')+']').attr('status', 'off');
+		$('.inputContainer [tag='+$(tag).attr('tag')+']').remove();
+	}
+	tagString = "";
+	$('.inputContainer .tag[status=on]').each(function() { 
+		tagString = tagString+"-"+$(this).attr('tag');
+	});
+	tagString = tagString.substring(1);
+	if ( filterRedirect == true ) {
+		$('.loader').show();
+		window.location.href = '/palettes/'+tagString;
+	}
+}
+
+function applyTag(tag) {
+	$('[tag='+tag+']').attr('status', 'on');
+	$('.tagBank [tag='+tag+']').clone().insertBefore($('.inputContainer input'));
+	$('.filterContainer input').addClass('filled');
+	$('.filterContainer input').val('');
+	$('.filterContainer input').attr('placeholder', 'Add tag');
+}
+
+function changeTimeframe(obj) {
+	$('.timeframe .button').attr('status','off')
+	$(obj).attr('status','on')
+	$('.loader').show();
+	$('.feed .item').not('.hide').fadeOut(100);
+	step = 0;
+	oktoload = "yes";
+	getFeed();
+}
+
+function copy(obj, url) {
+	input = document.createElement('input');
+	if ( url ) { 
+		input.setAttribute('value', document.URL); 
+		ga('send', 'event', 'interaction', 'copy_link');
+	} else {
+		ga('send', 'event', 'interaction', 'copy');
+		input.setAttribute('value', $(obj).attr('data-copy').replace('#',''));
+	}
+	document.body.appendChild(input);
+	input.select();
+	result = document.execCommand('copy');
+	document.body.removeChild(input)
+	setTimeout(function() { $('.copied').remove(); }, 1000);
+	$(obj).append("<div class='copied'>Copied</div>");
+}
+
+function formatThousands(n, dp) {
+  var s = ''+(Math.floor(n)), d = n % 1, i = s.length, r = '';
+  while ( (i -= 3) > 0 ) { r = ',' + s.substr(i, 3) + r; }
+  return s.substr(0, i + 3) + r + (d ? '.' + Math.round(d * Math.pow(10,dp||2)) : '');
+}
+
+function like(code) {
+	if ( myCollection.indexOf(code) == -1 ) {
+		myCollection.push(code);
+		$('.item[data-code=' + code +'] .like').attr('status','on');
+		$.post("/php/like.php",  { code: code }, function(data){  });
+		curlikes = $('.item[data-code=' + code + ']:last').find('.like span').text().replace(',','');
+		curlikes++;
+		curlikes = formatThousands(curlikes);
+		$('.item[data-code=' + code + ']').find('.like span').text(curlikes);
+		ga('send', 'event', 'interaction', 'like');
+		placeItem('likesList', code);
+		$('.right .likes').show();
+		if ( $('#like_tip').length > 0 ) {
+			$('#like_tip').remove();
+			ga('send', 'event', 'interaction', 'like_after_tip');
+		}
+		$('.likes').append("<div class='tip saved'>Saved!</div>");
+		$('.tongue').addClass('animate');
+		setTimeout(function() { $('.tongue').removeClass('animate'); }, 800)
+	} else {
+		myCollection.splice(myCollection.indexOf(code), 1);
+		$('.item[data-code=' + code +'] .like').attr('status','off');
+		$('.likes .palette[data-code=' + code +']').remove();
+		var curlikes = $('.item[data-code=' + code + ']:last').find('.like span').text().replace(',','');
+		curlikes--;
+		curlikes = formatThousands(curlikes);
+		$('.item[data-code=' + code + ']').find('.like span').text(curlikes);
+	}
+	localStorage.setItem('myCollection',myCollection);
+}
+
+function carbonAd() {
+	if ( carbonRendered == true ) { return }
+	carbonRendered = true;
+	script = document.createElement('script');
+	script.onload = function () {
+	  if (typeof _bsa !== 'undefined' && _bsa) {
+	    _bsa.init('custom', 'CK7DCK7E', 'placement:colorhuntco',
+	    {
+	      target: '#sponsor-banner',
+	      carbonfallback: 'CKYIP27I',
+	      disable_css: true,
+	      template: `
+				<div id="carbonads">
+				  <span>
+				    <span class="carbon-wrap">
+				      <a href="##statlink##" class="carbon-img" target="_blank" rel="noopener" style="background-color: ##backgroundColor##; padding: 28px 10px; max-width: 100%;">
+				        <img src="##logo##" alt="##company## - ##tagline##" border="0" height="100" width="100%" style="width: 110px; height: auto;">
+				      </a>
+				      <a href="##statlink##" class="carbon-text" target="_blank" rel="noopener">##description##</a>
+				    </span>
+				    <a href="##ad_via_link##" class="carbon-poweredby" target="_blank" rel="noopener">ads via BuySellAds</a>
+				  </span>
+				</div>
+	    `
+	    }, optimize()); //CALLING THE FALLBACK AD
+
+
+	  _bsa.init('custom', 'CWYDV53E', 'placement:colorhuntco-badgebanner', 
+	  {
+			target: '#badge-js',
+			template: `
+		  <style>
+		  .bsa__##external_id## {
+		  		background-image: linear-gradient(
+		  				145deg,
+		  				##backgroundColor##,
+		  				90%,
+		  				##backgroundColor##80
+		  			),
+		  			linear-gradient(##textColor## 1px, transparent 0),
+		  			linear-gradient(
+		  				90deg,
+		  				##textColor## 1px,
+		  				transparent 0
+		  			);
+		  		background-color: ##backgroundColor##;
+		  	}
+		  </style>
+		  <a class="badge-container bsa__##external_id##" style="background-color: ##backgroundColor##; color: ##textColor##; border-color: ##textColor##" href="##link##" rel="sponsored noopener" target="_blank" title="##company## — ##tagline##">
+		  <img class="badge-icon" style="background-color: ##backgroundColor##" src="##image##">
+		  <div class="badge-flex">
+		  	<div class="badge-title">##company## — ##tagline##</div>
+		  	<div class="badge-description">##description##</div>
+		  	<img class="badge-logo" src="##logo##">
+		  	<div class="badge-cta" style="background-color: ##ctaBackgroundColor##; color: ##ctaTextColor##">##callToAction##</div>
+		  </div>
+		  </a>
+		  <a class="badge-ad-via" title="ad via BuySellAds" style="background-color: ##textColor##; color: ##backgroundColor##" href="##ad_via_link##">Ads via BuySellAds</a>
+		  `
+			});
+
+	 }
+	};
+	script.src = "//m.servedby-buysellads.com/monetization.js";
+	document.head.appendChild(script);
+}
+
+function optimize() {
+	setTimeout(function() {
+		loadOptimize = false
+
+		  if ($('#sponsor-banner').html().length > 300 ) { 
+		  	$('#bsa-zone_1682448560669-3_123456').remove()
+		  } else {
+		  	loadOptimize = true
+		  }
+
+		  if ( single != '' ) {
+		  	if ( $('#badge-js').html().length > 300 ) { 
+		  		$('#bsa-zone_1682448365049-4_123456').remove()
+		  	} else {
+		  		loadOptimize = true
+		  	}
+		  }
+
+		  if ( loadOptimize == true ) {
+		  	console.log('Loading Optimize')
+		  	var bsa_optimize=document.createElement('script');
+		  	bsa_optimize.type='text/javascript';
+		  	bsa_optimize.async=true;
+		  	bsa_optimize.src='https://cdn4.buysellads.net/pub/colorhunt.js?'+(new Date()-new Date()%600000);
+		  	(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa_optimize);
+		  }
+
+	},2000)
+
+
+
+
+}
+
+</script>
+</body></html>
